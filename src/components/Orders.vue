@@ -167,7 +167,7 @@
 </template>
 
 <script>
-import { ordersDatabase } from '../utils/database.js';
+import { useOrdersStore } from '../stores/orders.js';
 
 export default {
   name: 'OrdersPage',
@@ -190,13 +190,19 @@ export default {
       sortDirection: 'asc'
     };
   },
+  setup() {
+    const ordersStore = useOrdersStore()
+    return { ordersStore }
+  },
   mounted() {
+    // Initialize sample data if needed
+    this.ordersStore.initializeSampleData()
     this.loadOrders();
   },
   methods: {
     async loadOrders() {
       try {
-        this.orders = await ordersDatabase.getAllOrders();
+        this.orders = await this.ordersStore.getAllOrdersAsync();
         this.filteredOrders = [...this.orders];
         this.applySorting();
       } catch (error) {
@@ -209,7 +215,7 @@ export default {
         this.filteredOrders = [...this.orders];
       } else {
         try {
-          this.filteredOrders = await ordersDatabase.searchOrders(this.searchQuery);
+          this.filteredOrders = await this.ordersStore.searchOrders(this.searchQuery);
         } catch (error) {
           console.error('Error searching orders:', error);
         }
@@ -262,7 +268,7 @@ export default {
     async deleteOrder(orderId) {
       if (confirm('Are you sure you want to delete this order?')) {
         try {
-          await ordersDatabase.deleteOrder(orderId);
+          await this.ordersStore.deleteOrder(orderId);
           await this.loadOrders();
         } catch (error) {
           console.error('Error deleting order:', error);
@@ -273,9 +279,9 @@ export default {
     async submitOrder() {
       try {
         if (this.showCreateModal) {
-          await ordersDatabase.createOrder(this.currentOrder);
+          await this.ordersStore.createOrder(this.currentOrder);
         } else {
-          await ordersDatabase.updateOrder(this.editingOrderId, this.currentOrder);
+          await this.ordersStore.updateOrder(this.editingOrderId, this.currentOrder);
         }
         await this.loadOrders();
         this.closeModal();
