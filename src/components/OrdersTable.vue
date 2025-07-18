@@ -65,32 +65,22 @@
           </td>
           <td class="created-at">{{ formatDate(order.createdAt) }}</td>
           <td class="actions">
-            <button @click="$emit('view-order', order)" class="btn btn-sm btn-info" title="View Order">
-              <svg class="icon" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
-                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
-              </svg>
+            <button @click="$emit('view-order', order)" class="btn btn-sm btn-view" title="View Order">
+              VIEW
             </button>
             <button @click="$emit('edit-order', order)" class="btn btn-sm btn-edit" title="Edit Order">
-              <svg class="icon" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
-              </svg>
+              EDIT
             </button>
             <button 
               v-if="canCancelOrder(order.status)"
               @click="$emit('cancel-order', order)" 
-              class="btn btn-sm btn-warning" 
+              class="btn btn-sm btn-cancel" 
               title="Cancel Order"
             >
-              <svg class="icon" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
-              </svg>
+              CANCEL
             </button>
             <button @click="$emit('delete-order', order)" class="btn btn-sm btn-delete" title="Delete Order">
-              <svg class="icon" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" clip-rule="evenodd"/>
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-              </svg>
+              DELETE
             </button>
           </td>
         </tr>
@@ -376,43 +366,43 @@ export default {
 }
 
 .btn-sm {
-  padding: 8px;
-  font-size: 12px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
-.icon {
-  width: 16px;
-  height: 16px;
-}
-
-.btn-info {
+.btn-view {
   background-color: #3B82F6;
   color: #FFFFFF;
 }
 
-.btn-info:hover {
+.btn-view:hover {
   background-color: #2563EB;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
 }
 
 .btn-edit {
-  background-color: #22C55E;
+  background-color: #3B82F6;
   color: #FFFFFF;
 }
 
 .btn-edit:hover {
-  background-color: #16A34A;
+  background-color: #2563EB;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
 }
 
-.btn-warning {
+.btn-cancel {
   background-color: #F59E0B;
   color: #FFFFFF;
 }
 
-.btn-warning:hover {
+.btn-cancel:hover {
   background-color: #D97706;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
