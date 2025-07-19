@@ -2,7 +2,7 @@
   <div v-if="show" class="modal-overlay" @click="closeModal">
     <div class="modal" @click.stop>
       <div class="modal-header">
-        <h2>{{ isEditing ? 'Edit Order' : 'Create New Order' }}</h2>
+        <h2>{{ isEditing ? 'Edit Order' : 'Create New Load' }}</h2>
         <button @click="closeModal" class="close-btn">&times;</button>
       </div>
       

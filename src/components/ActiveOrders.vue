@@ -25,6 +25,10 @@
             class="search-input"
           />
         </div>
+        <button @click="createNewOrder" class="create-order-btn">
+          <span class="create-order-icon">+</span>
+          Create Order
+        </button>
       </div>
     </div>
 
@@ -140,6 +144,11 @@ export default {
           console.error('Error searching active orders:', error)
         }
       }
+    },
+    
+    createNewOrder() {
+      this.currentOrder = null
+      this.showCreateModal = true
     },
     
     editOrder(order) {
@@ -294,10 +303,13 @@ export default {
 
 .search-section {
   width: 100%;
+  display: flex;
+  gap: 16px;
+  align-items: center;
 }
 
 .search-bar {
-  width: 100%;
+  flex: 1;
 }
 
 .search-input {
@@ -320,6 +332,35 @@ export default {
 
 .search-input::placeholder {
   color: #475569;
+}
+
+.create-order-btn {
+  font-family: 'Manrope', sans-serif;
+  background-color: #EF4444;
+  color: #FFFFFF;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.15s ease-in-out;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.create-order-btn:hover {
+  background-color: #DC2626;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 10px -1px rgba(0, 0, 0, 0.15), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.create-order-icon {
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .table-container {
