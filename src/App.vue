@@ -4,32 +4,48 @@
       <h1>Admin Portal</h1>
       <nav class="nav">
         <button 
-          :class="{ active: currentView === 'orders' }" 
-          @click="currentView = 'orders'"
+          :class="{ active: currentView === 'active-orders' }" 
+          @click="currentView = 'active-orders'"
           class="nav-btn"
         >
-          Orders
+          Active Orders
+        </button>
+        <button 
+          :class="{ active: currentView === 'archived-orders' }" 
+          @click="currentView = 'archived-orders'"
+          class="nav-btn"
+        >
+          Archived Orders
         </button>
       </nav>
     </header>
     
     <main class="app-main">
-      <OrdersView v-if="currentView === 'orders'" />
+      <ActiveOrders 
+        v-if="currentView === 'active-orders'" 
+        @switch-to-archived="currentView = 'archived-orders'"
+      />
+      <ArchivedOrders 
+        v-if="currentView === 'archived-orders'" 
+        @switch-to-active="currentView = 'active-orders'"
+      />
     </main>
   </div>
 </template>
 
 <script>
-import OrdersView from './components/OrdersView.vue'
+import ActiveOrders from './components/ActiveOrders.vue'
+import ArchivedOrders from './components/ArchivedOrders.vue'
 
 export default {
   name: 'App',
   components: {
-    OrdersView
+    ActiveOrders,
+    ArchivedOrders
   },
   data() {
     return {
-      currentView: 'orders'
+      currentView: 'active-orders' // Default to Active Orders as required
     }
   }
 }
