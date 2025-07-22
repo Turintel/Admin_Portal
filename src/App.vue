@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <AppSidebar />
     <main class="app-main">
       <ActiveOrders 
         v-if="currentView === 'active-orders'" 
@@ -16,12 +17,14 @@
 <script>
 import ActiveOrders from './components/ActiveOrders.vue'
 import ArchivedOrders from './components/ArchivedOrders.vue'
+import AppSidebar from './components/AppSidebar.vue'
 
 export default {
   name: 'App',
   components: {
     ActiveOrders,
-    ArchivedOrders
+    ArchivedOrders,
+    AppSidebar, 
   },
   data() {
     return {
@@ -53,11 +56,11 @@ body {
 #app {
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
 }
 
 .app-main {
   flex: 1;
+  margin-left: 256px; /* Sidebar width */
   background-color: #F8FAFC;
 }
 </style>
